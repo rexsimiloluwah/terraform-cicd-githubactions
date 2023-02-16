@@ -101,5 +101,5 @@ jobs:
             sudo docker rm go-sample-app-container || true
             echo $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
             sudo docker pull $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
-            sudo docker run -d --name go-sample-app-container -p 80:5045 $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
+            sudo docker run -d --name go-sample-app-container -p 8080:5045 $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
 
