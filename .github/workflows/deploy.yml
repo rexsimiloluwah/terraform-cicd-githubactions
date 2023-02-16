@@ -46,7 +46,7 @@ jobs:
       - name: Set output
         id: set-ip
         run: |-
-          output_ip=terraform output ec2_server_eip_public
+          output_ip=$(terraform output ec2_server_eip_public)
           echo "instance_public_ip=$output_ip" >> $GITHUB_OUTPUT
         working-directory: ./terraform
   deploy-app:
