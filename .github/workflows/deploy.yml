@@ -64,15 +64,17 @@ jobs:
           REPOSITORY: go-sample-app-repo
           IMAGE_TAG: ${{ github.sha }}
           AWS_DEFAULT_REGION: ${AWS_REGION}
+          REGISTRY_ALIAS: j5g5k6x3
         run: |-
           docker pull similoluwaokunowo/go-docker-sample-app 
-          docker tag similoluwaokunowo/go-docker-sample-app $REGISTRY/$REPOSITORY:$IMAGE_TAG 
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker tag similoluwaokunowo/go-docker-sample-app $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG 
+          docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
       - name: Deploy docker image to EC2 instance
         env:
           REGISTRY: ${{ steps.ecr-login.outputs.registry }}
           REPOSITORY: go-sample-app-repo
           IMAGE_TAG: ${{ github.sha }}
+          REGISTRY_ALIAS: j5g5k6x3
           AWS_DEFAULT_REGION: ${AWS_REGION}
         uses: appleboy/ssh-action@v0.1.7
         with:
@@ -87,6 +89,6 @@ jobs:
             sudo $(aws ecr get-login --no-include-email --region ${AWS_REGION})
             sudo docker stop go-sample-app-container  || true 
             sudo docker rm go-sample-app-container || true
-            sudo docker pull $REGISTRY/$REPOSITORY:$IMAGE_TAG
-            sudo docker run -d --name go-sample-app-container -p 80:5045 $REGISTRY/$REPOSITORY:$IMAGE_TAG
+            sudo docker pull $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
+            sudo docker run -d --name go-sample-app-container -p 80:5045 $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
 
