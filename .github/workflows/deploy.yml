@@ -45,6 +45,7 @@ jobs:
         working-directory: ./terraform
       - name: Set output
         run: |-
+          echo $(terraform output ec2_server_eip_public)
           echo "instance_public_ip=$(terraform output ec2_server_eip_public)" >> "$GITHUB_OUTPUT"
         working-directory: ./terraform
   deploy-app:
