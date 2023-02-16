@@ -211,7 +211,7 @@ resource "aws_instance" "ec2_server" {
   }
 
   # user data 
-  user_data = file("../scripts/install-apache.sh")
+  # user_data = file("../scripts/install-apache.sh")
 
   connection {
     type        = "ssh"
