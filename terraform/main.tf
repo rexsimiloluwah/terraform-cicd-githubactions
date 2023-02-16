@@ -19,7 +19,6 @@ terraform {
 
 provider "aws" {
   region = var.region
-  profile = "ademola"
 }
 
 # Create VPC 
